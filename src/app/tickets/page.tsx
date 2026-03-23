@@ -2,6 +2,46 @@ import { Hero } from '@/components/ui/hero';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Buy Tickets | APOEL FC Fan Portal',
+  description: 'Secure your spot at GSP Stadium for the 2025–26 season. General Admission, VIP, and Season Pass options available.',
+  keywords: ['APOEL tickets', 'GSP Stadium tickets', 'APOEL FC tickets', 'football tickets Cyprus'],
+  authors: [{ name: 'APOEL FC' }],
+  creator: 'APOEL FC',
+  publisher: 'APOEL Football Club',
+  metadataBase: new URL('https://apoel.everestlabs.dev'),
+  openGraph: {
+    title: 'Buy Tickets | APOEL FC Fan Portal',
+    description: 'Secure your spot at GSP Stadium for the 2025–26 season. General Admission, VIP, and Season Pass options available.',
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://apoel.everestlabs.dev/tickets',
+    siteName: 'APOEL FC',
+    images: [
+      {
+        url: 'https://apoel.everestlabs.dev/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Buy APOEL FC Tickets',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Buy Tickets | APOEL FC',
+    description: 'Secure your spot at GSP Stadium',
+    creator: '@APOEL_FC',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: 'https://apoel.everestlabs.dev/tickets',
+  },
+};
 
 export default function TicketsPage() {
   const ticketTypes = [

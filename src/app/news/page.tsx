@@ -2,6 +2,12 @@ import { Hero } from '@/components/ui/hero';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'News | APOEL FC Fan Portal',
+  description: 'Stay updated with the latest APOEL FC news and announcements. Squad signings, stadium updates, and club news.',
+};
 
 export default function NewsPage() {
   const news = [

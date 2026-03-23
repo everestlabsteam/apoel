@@ -3,6 +3,12 @@ import { TimelineItem } from '@/components/ui/timeline-item';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { historyEras } from '@/data/history';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'History | APOEL FC Fan Portal',
+  description: 'From 1926 to 29 league titles — the story of APOEL FC. Join us in celebrating our legacy and rich football history.',
+};
 
 export default function HistoryPage() {
   // Flatten history eras for timeline

@@ -3,6 +3,12 @@ import { MatchCard } from '@/components/ui/match-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { nextMatch, recentMatches } from '@/data/matches';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Fixtures & Results | APOEL FC Fan Portal',
+  description: 'Follow APOEL FC through every match of the 2025–26 season. Check fixtures, results, and league standings.',
+};
 
 export default function FixturesPage() {
   const upcomingMatches = nextMatch ? [nextMatch] : [];

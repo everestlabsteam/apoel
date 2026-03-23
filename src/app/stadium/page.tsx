@@ -2,6 +2,12 @@ import { Hero } from '@/components/ui/hero';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { stadiumInfo } from '@/data/stadium';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'GSP Stadium | APOEL FC Fan Portal',
+  description: 'The home of APOEL FC — Nicosia\'s iconic football arena. Visit us for unforgettable match days.',
+};
 
 export default function StadiumPage() {
   return (

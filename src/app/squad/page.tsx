@@ -3,6 +3,12 @@ import { PlayerCard } from '@/components/ui/player-card';
 import { squad } from '@/data/squad';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '2025–26 Squad | APOEL FC Fan Portal',
+  description: 'Meet the players who make history every season. Full 2025–26 APOEL FC squad with jersey numbers and positions.',
+};
 
 export default function SquadPage() {
   const positions = ['goalkeepers', 'defenders', 'midfielders', 'forwards'];
