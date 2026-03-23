@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/navigation/header';
 import { Footer } from '@/components/layout/footer';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { Providers } from './providers';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -24,50 +24,6 @@ export const metadata: Metadata = {
   },
 };
 
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: { main: '#F7941D' },
-    secondary: { main: '#FFFFFF' },
-    background: { default: '#0A0A0A', paper: '#141414' },
-    text: {
-      primary: '#FFFFFF',
-      secondary: '#B0B0B0',
-    },
-  },
-  typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", sans-serif',
-    h1: {
-      fontWeight: 700,
-    },
-    h2: {
-      fontWeight: 700,
-    },
-    h3: {
-      fontWeight: 700,
-    },
-    h4: {
-      fontWeight: 600,
-    },
-    h5: {
-      fontWeight: 600,
-    },
-    h6: {
-      fontWeight: 600,
-    },
-  },
-  components: {
-    MuiLink: {
-      styleOverrides: {
-        root: {
-          color: 'inherit',
-          textDecoration: 'none',
-        },
-      },
-    },
-  },
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -75,13 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} font-sans`}>
-      <body className="min-h-screen bg-[#0A0A0A] text-[#FFFFFF]">
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+      <body className="min-h-screen bg-[#1A1A1A] text-[#FFFFFF]">
+        <Providers>
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
