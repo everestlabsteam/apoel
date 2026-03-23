@@ -1,7 +1,7 @@
-import { Hero } from '@/components/ui/hero';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Hero } from '@/components/ui/hero-mui';
+import { Box, Typography, Container, Grid, Card, CardContent, Button as MuiButton, CardMedia } from '@mui/material';
 import Link from 'next/link';
+import { theme } from '@/lib/theme';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function NewsPage() {
   ];
 
   return (
-    <div className="space-y-16">
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Hero Section */}
       <Hero
         title="Latest News"
@@ -41,47 +41,107 @@ export default function NewsPage() {
       />
 
       {/* News Grid */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.default }}>
+        <Container>
+          <Grid container spacing={8}>
             {news.map((item, index) => (
-              <Card key={index} hover className="group cursor-pointer">
-                <div className="aspect-video bg-surface/50 overflow-hidden">
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-text-secondary">Image {index + 1}</span>
-                  </div>
-                </div>
-                <CardContent className="p-6">
-                  <div className="text-xs text-primary font-bold mb-2">
-                    {item.date}
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-text-secondary">{item.excerpt}</p>
-                  <Button variant="outline" className="mt-4 p-0 h-auto">
-                    Read More →
-                  </Button>
-                </CardContent>
-              </Card>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    backgroundColor: theme.palette.background.paper,
+                    '&:hover': {
+                      boxShadow: 4,
+                      transform: 'translateY(-4px)',
+                      transition: 'all 0.3s ease',
+                    },
+                  }}
+                >
+                  <Box
+                    sx={{
+                      height: 180,
+                      backgroundColor: `${theme.palette.primary.main}10`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                      Image {index + 1}
+                    </Typography>
+                  </Box>
+                  <CardContent sx={{ p: 4, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Typography variant="caption" sx={{ color: theme.palette.primary.main, fontWeight: 700, mb: 2 }}>
+                      {item.date}
+                    </Typography>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontWeight: 700,
+                        color: theme.palette.text.primary,
+                        mb: 2,
+                        '&:hover': {
+                          color: theme.palette.primary.main,
+                        },
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: theme.palette.text.secondary, mb: 4, flex: 1 }}>
+                      {item.excerpt}
+                    </Typography>
+                    <MuiButton
+                      variant="text"
+                      sx={{
+                        color: theme.palette.primary.main,
+                        fontWeight: 600,
+                        p: 0,
+                        '&:hover': {
+                          backgroundColor: 'transparent',
+                        },
+                      }}
+                    >
+                      Read More →
+                    </MuiButton>
+                  </CardContent>
+                </Card>
+              </Grid>
             ))}
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Box>
 
       {/* Archive Section */}
-      <section className="py-12 bg-surface">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">News Archive</h2>
-          <p className="text-text-secondary mb-8">
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.paper }}>
+        <Container sx={{ textAlign: 'center' }}>
+          <Typography variant="h2" sx={{ fontSize: '2rem', fontWeight: 700, color: theme.palette.text.primary, mb: 4 }}>
+            News Archive
+          </Typography>
+          <Typography variant="body1" sx={{ color: theme.palette.text.secondary, mb: 8 }}>
             Browse our complete archive of news articles, press releases, and
             announcements.
-          </p>
-          <Button variant="primary" size="lg">
+          </Typography>
+          <MuiButton
+            variant="contained"
+            size="large"
+            sx={{
+              backgroundColor: theme.palette.primary.main,
+              color: '#FFFFFF',
+              px: 6,
+              py: 1.5,
+              fontWeight: 600,
+              '&:hover': {
+                backgroundColor: '#d67c0d',
+              },
+            }}
+          >
             View All News
-          </Button>
-        </div>
-      </section>
-    </div>
+          </MuiButton>
+        </Container>
+      </Box>
+    </Box>
   );
 }

@@ -1,7 +1,7 @@
-import { Hero } from '@/components/ui/hero';
-import { TimelineItem } from '@/components/ui/timeline-item';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Hero } from '@/components/ui/hero-mui';
+import { TimelineItem } from '@/components/ui/timeline-item-mui';
+import { Box, Typography, Container, Grid, Card, CardContent, Button as MuiButton } from '@mui/material';
+import { theme } from '@/lib/theme';
 import { historyEras } from '@/data/history';
 import type { Metadata } from 'next';
 
@@ -21,7 +21,7 @@ export default function HistoryPage() {
   );
 
   return (
-    <div className="space-y-16">
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Hero Section */}
       <Hero
         title="A Legacy of Excellence"
@@ -30,127 +30,167 @@ export default function HistoryPage() {
       />
 
       {/* Quick Stats */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center py-8">
-                <div className="text-4xl font-bold text-primary mb-2">1926</div>
-                <div className="text-sm text-text-secondary uppercase tracking-wider">
-                  Founded
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center py-8">
-                <div className="text-4xl font-bold text-primary mb-2">29</div>
-                <div className="text-sm text-text-secondary uppercase tracking-wider">
-                  League Titles
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center py-8">
-                <div className="text-4xl font-bold text-primary mb-2">Quarter-Finals</div>
-                <div className="text-sm text-text-secondary uppercase tracking-wider">
-                  Champions League
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.default }}>
+        <Container>
+          <Grid container spacing={4}>
+            <Grid size={{ md: 4 }}>
+              <Card sx={{ backgroundColor: theme.palette.background.paper, textAlign: 'center' }}>
+                <CardContent sx={{ p: 4 }}>
+                  <Typography variant="h2" sx={{ fontWeight: 700, color: theme.palette.primary.main, mb: 1 }}>
+                    1926
+                  </Typography>
+                  <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: theme.palette.text.secondary }}>
+                    Founded
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid size={{ md: 4 }}>
+              <Card sx={{ backgroundColor: theme.palette.background.paper, textAlign: 'center' }}>
+                <CardContent sx={{ p: 4 }}>
+                  <Typography variant="h2" sx={{ fontWeight: 700, color: theme.palette.primary.main, mb: 1 }}>
+                    29
+                  </Typography>
+                  <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: theme.palette.text.secondary }}>
+                    League Titles
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid size={{ md: 4 }}>
+              <Card sx={{ backgroundColor: theme.palette.background.paper, textAlign: 'center' }}>
+                <CardContent sx={{ p: 4 }}>
+                  <Typography variant="h2" sx={{ fontWeight: 700, color: theme.palette.primary.main, mb: 1 }}>
+                    Quarter-Finals
+                  </Typography>
+                  <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: theme.palette.text.secondary }}>
+                    Champions League
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
       {/* Timeline */}
-      <section className="py-12 bg-surface">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-12">29 League Titles Timeline</h2>
-          <div className="space-y-4">
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.paper }}>
+        <Container>
+          <Typography variant="h2" sx={{ fontSize: '2rem', fontWeight: 700, color: theme.palette.text.primary, mb: 12 }}>
+            29 League Titles Timeline
+          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {timelineItems.map((item, index) => (
               <TimelineItem
                 key={`${item.eraTitle}-${item.date}`}
+                title={item.eraTitle}
                 date={item.date}
                 description={item.description}
-                expanded={index === 0}
+                eraTitle={item.eraTitle}
+                index={index}
               />
             ))}
-          </div>
-        </div>
-      </section>
+          </Box>
+        </Container>
+      </Box>
 
       {/* Champions League Journey */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8">European Glory</h2>
-          <Card>
-            <CardContent className="p-8">
-              <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-white mb-4">
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.default }}>
+        <Container>
+          <Typography variant="h2" sx={{ fontSize: '2rem', fontWeight: 700, color: theme.palette.text.primary, mb: 8 }}>
+            European Glory
+          </Typography>
+          <Card sx={{ backgroundColor: theme.palette.background.paper }}>
+            <CardContent sx={{ p: 8 }}>
+              <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', gap: 8 }}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="h3" sx={{ fontSize: '1.5rem', fontWeight: 700, color: theme.palette.text.primary, mb: 4 }}>
                     2011–12 UEFA Champions League
-                  </h3>
-                  <p className="text-text-secondary mb-6">
+                  </Typography>
+                  <Typography variant="body1" sx={{ color: theme.palette.text.secondary, mb: 6 }}>
                     APOEL made history by becoming the first Cypriot club to reach the
                     quarter-finals of the UEFA Champions League. Our journey included
                     memorable victories over Rosenborg, Panathinaikos, and Real Madrid
                     in the Round of 32.
-                  </p>
-                  <Button variant="primary">Read Full Story</Button>
-                </div>
-                <div className="flex-1">
-                  <div className="bg-primary/10 rounded-lg p-6 text-center">
-                    <div className="text-5xl font-bold text-primary mb-2">8</div>
-                    <div className="text-sm text-text-secondary uppercase tracking-wider">
+                  </Typography>
+                  <MuiButton variant="contained" sx={{ backgroundColor: theme.palette.primary.main, color: '#FFFFFF', '&:hover': { backgroundColor: '#d67c0d' } }}>
+                    Read Full Story
+                  </MuiButton>
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Box sx={{ backgroundColor: `${theme.palette.primary.main}10`, borderRadius: '0.5rem', p: 6, textAlign: 'center' }}>
+                    <Typography variant="h1" sx={{ fontWeight: 700, color: theme.palette.primary.main, mb: 2 }}>
+                      8
+                    </Typography>
+                    <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: theme.palette.text.secondary }}>
                       Matches Played
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
             </CardContent>
           </Card>
-        </div>
-      </section>
+        </Container>
+      </Box>
 
       {/* Club Stats */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8">Club Statistics</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center py-8">
-                <div className="text-4xl font-bold text-primary mb-2">29</div>
-                <div className="text-sm text-text-secondary uppercase tracking-wider">
-                  League Titles
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center py-8">
-                <div className="text-4xl font-bold text-primary mb-2">21</div>
-                <div className="text-sm text-text-secondary uppercase tracking-wider">
-                  Cups
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center py-8">
-                <div className="text-4xl font-bold text-primary mb-2">13</div>
-                <div className="text-sm text-text-secondary uppercase tracking-wider">
-                  Super Cups
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center py-8">
-                <div className="text-4xl font-bold text-primary mb-2">1</div>
-                <div className="text-sm text-text-secondary uppercase tracking-wider">
-                  CL Quarter-Finals
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-    </div>
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.default }}>
+        <Container>
+          <Typography variant="h2" sx={{ fontSize: '2rem', fontWeight: 700, color: theme.palette.text.primary, mb: 8 }}>
+            Club Statistics
+          </Typography>
+          <Grid container spacing={4}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Card sx={{ backgroundColor: theme.palette.background.paper, textAlign: 'center' }}>
+                <CardContent sx={{ p: 4 }}>
+                  <Typography variant="h2" sx={{ fontWeight: 700, color: theme.palette.primary.main, mb: 1 }}>
+                    29
+                  </Typography>
+                  <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: theme.palette.text.secondary }}>
+                    League Titles
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Card sx={{ backgroundColor: theme.palette.background.paper, textAlign: 'center' }}>
+                <CardContent sx={{ p: 4 }}>
+                  <Typography variant="h2" sx={{ fontWeight: 700, color: theme.palette.primary.main, mb: 1 }}>
+                    21
+                  </Typography>
+                  <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: theme.palette.text.secondary }}>
+                    Cups
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Card sx={{ backgroundColor: theme.palette.background.paper, textAlign: 'center' }}>
+                <CardContent sx={{ p: 4 }}>
+                  <Typography variant="h2" sx={{ fontWeight: 700, color: theme.palette.primary.main, mb: 1 }}>
+                    13
+                  </Typography>
+                  <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: theme.palette.text.secondary }}>
+                    Super Cups
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Card sx={{ backgroundColor: theme.palette.background.paper, textAlign: 'center' }}>
+                <CardContent sx={{ p: 4 }}>
+                  <Typography variant="h2" sx={{ fontWeight: 700, color: theme.palette.primary.main, mb: 1 }}>
+                    1
+                  </Typography>
+                  <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: theme.palette.text.secondary }}>
+                    CL Quarter-Finals
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </Box>
   );
 }

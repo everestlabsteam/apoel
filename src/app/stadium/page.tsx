@@ -1,7 +1,7 @@
-import { Hero } from '@/components/ui/hero';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Hero } from '@/components/ui/hero-mui';
+import { Box, Typography, Container, Grid, Card, CardContent, Button as MuiButton } from '@mui/material';
 import { stadiumInfo } from '@/data/stadium';
+import { theme } from '@/lib/theme';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function StadiumPage() {
   return (
-    <div className="space-y-16">
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Hero Section */}
       <Hero
         title="GSP Stadium"
@@ -20,96 +20,177 @@ export default function StadiumPage() {
       />
 
       {/* Stadium Info */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card>
-              <CardContent className="p-8">
-                <h2 className="text-2xl font-bold text-white mb-6">Stadium Facts</h2>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center border-b border-surface/50 pb-4">
-                    <span className="text-text-secondary">Capacity</span>
-                    <span className="font-bold text-primary">{stadiumInfo.capacity.toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-surface/50 pb-4">
-                    <span className="text-text-secondary">Opened</span>
-                    <span className="font-bold text-primary">{stadiumInfo.opened}</span>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-surface/50 pb-4">
-                    <span className="text-text-secondary">Location</span>
-                    <span className="font-bold text-primary">{stadiumInfo.location}</span>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-surface/50 pb-4">
-                    <span className="text-text-secondary">Home To</span>
-                    <span className="font-bold text-primary">{stadiumInfo.homeTo.join(' & ')}</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-8">
-                <h2 className="text-2xl font-bold text-white mb-6">Visit Us</h2>
-                <div className="space-y-4">
-                  <div>
-                    <span className="block text-text-secondary mb-1">Address</span>
-                    <span className="text-white">Stadium Avenue</span>
-                    <span className="block text-text-secondary">Nicosia, Cyprus</span>
-                  </div>
-                  <div>
-                    <span className="block text-text-secondary mb-1">Parking</span>
-                    <span className="text-white">Available on match days</span>
-                  </div>
-                  <div>
-                    <span className="block text-text-secondary mb-1">Public Transport</span>
-                    <span className="text-white">Bus lines 171, 172, 173</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.default }}>
+        <Container>
+          <Grid container spacing={8}>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Card sx={{ backgroundColor: theme.palette.background.paper }}>
+                <CardContent sx={{ p: 8 }}>
+                  <Typography variant="h2" sx={{ fontSize: '1.5rem', fontWeight: 700, color: theme.palette.text.primary, mb: 6 }}>
+                    Stadium Facts
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid #2A2A2A`, pb: 4 }}>
+                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                        Capacity
+                      </Typography>
+                      <Typography variant="h6" sx={{ fontWeight: 700, color: theme.palette.primary.main }}>
+                        {stadiumInfo.capacity.toLocaleString()}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid #2A2A2A`, pb: 4 }}>
+                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                        Opened
+                      </Typography>
+                      <Typography variant="h6" sx={{ fontWeight: 700, color: theme.palette.primary.main }}>
+                        {stadiumInfo.opened}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid #2A2A2A`, pb: 4 }}>
+                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                        Location
+                      </Typography>
+                      <Typography variant="h6" sx={{ fontWeight: 700, color: theme.palette.primary.main }}>
+                        {stadiumInfo.location}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid #2A2A2A`, pb: 4 }}>
+                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                        Home To
+                      </Typography>
+                      <Typography variant="h6" sx={{ fontWeight: 700, color: theme.palette.primary.main }}>
+                        {stadiumInfo.homeTo.join(' & ')}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Card sx={{ backgroundColor: theme.palette.background.paper }}>
+                <CardContent sx={{ p: 8 }}>
+                  <Typography variant="h2" sx={{ fontSize: '1.5rem', fontWeight: 700, color: theme.palette.text.primary, mb: 6 }}>
+                    Visit Us
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                    <Box>
+                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary, mb: 1 }}>
+                        Address
+                      </Typography>
+                      <Typography variant="body1" sx={{ color: theme.palette.text.primary }}>
+                        Stadium Avenue
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                        Nicosia, Cyprus
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary, mb: 1 }}>
+                        Parking
+                      </Typography>
+                      <Typography variant="body1" sx={{ color: theme.palette.text.primary }}>
+                        Available on match days
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary, mb: 1 }}>
+                        Public Transport
+                      </Typography>
+                      <Typography variant="body1" sx={{ color: theme.palette.text.primary }}>
+                        Bus lines 171, 172, 173
+                      </Typography>
+                    </Box>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
       {/* Stadium Gallery */}
-      <section className="py-12 bg-surface">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8">Stadium Gallery</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="aspect-video bg-primary/10 rounded-lg flex items-center justify-center">
-              <span className="text-text-secondary">Match Day Atmosphere</span>
-            </div>
-            <div className="aspect-video bg-primary/10 rounded-lg flex items-center justify-center">
-              <span className="text-text-secondary">Pitch View</span>
-            </div>
-            <div className="aspect-video bg-primary/10 rounded-lg flex items-center justify-center">
-              <span className="text-text-secondary">Stadium Exterior</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.paper }}>
+        <Container>
+          <Typography variant="h2" sx={{ fontSize: '2rem', fontWeight: 700, color: theme.palette.text.primary, mb: 8 }}>
+            Stadium Gallery
+          </Typography>
+          <Grid container spacing={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <Box sx={{ aspectRatio: '16/9', backgroundColor: `${theme.palette.primary.main}10`, borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                  Match Day Atmosphere
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <Box sx={{ aspectRatio: '16/9', backgroundColor: `${theme.palette.primary.main}10`, borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                  Pitch View
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <Box sx={{ aspectRatio: '16/9', backgroundColor: `${theme.palette.primary.main}10`, borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                  Stadium Exterior
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
       {/* Ticket Info */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <Card>
-            <CardContent className="p-8 text-center">
-              <h2 className="text-2xl font-bold text-white mb-4">Plan Your Visit</h2>
-              <p className="text-text-secondary mb-8 max-w-2xl mx-auto">
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.default }}>
+        <Container>
+          <Card sx={{ backgroundColor: theme.palette.background.paper }}>
+            <CardContent sx={{ p: 8, textAlign: 'center' }}>
+              <Typography variant="h2" sx={{ fontSize: '1.5rem', fontWeight: 700, color: theme.palette.text.primary, mb: 4 }}>
+                Plan Your Visit
+              </Typography>
+              <Typography variant="body1" sx={{ color: theme.palette.text.secondary, maxWidth: '48rem', mx: 'auto', mb: 8 }}>
                 Experience the roar of 22,859 fans at GSP Stadium. Ticket sales open
                 7 days before each match. Arrive early to enjoy the pre-match atmosphere.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="primary" size="lg">
+              </Typography>
+              <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 4, justifyContent: 'center' }}>
+                <MuiButton
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    backgroundColor: theme.palette.primary.main,
+                    color: '#FFFFFF',
+                    px: 6,
+                    py: 1.5,
+                    fontWeight: 600,
+                    '&:hover': {
+                      backgroundColor: '#d67c0d',
+                    },
+                  }}
+                >
                   Buy Tickets
-                </Button>
-                <Button variant="outline" size="lg">
+                </MuiButton>
+                <MuiButton
+                  variant="outlined"
+                  size="large"
+                  sx={{
+                    borderColor: theme.palette.primary.main,
+                    color: theme.palette.primary.main,
+                    px: 6,
+                    py: 1.5,
+                    fontWeight: 600,
+                    '&:hover': {
+                      backgroundColor: `${theme.palette.primary.main}10`,
+                      borderColor: theme.palette.primary.main,
+                    },
+                  }}
+                >
                   Group Bookings
-                </Button>
-              </div>
+                </MuiButton>
+              </Box>
             </CardContent>
           </Card>
-        </div>
-      </section>
-    </div>
+        </Container>
+      </Box>
+    </Box>
   );
 }

@@ -1,7 +1,9 @@
 import { Hero } from '@/components/ui/hero';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardTitle, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
+import { Box, Container, Typography, Grid } from '@mui/material';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -77,7 +79,7 @@ export default function TicketsPage() {
   ];
 
   return (
-    <div className="space-y-16">
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 4, md: 8 } }}>
       {/* Hero Section */}
       <Hero
         title="Buy Tickets"
@@ -86,116 +88,153 @@ export default function TicketsPage() {
       />
 
       {/* Ticket Cards */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <Box sx={{ py: { xs: 4, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={4}>
             {ticketTypes.map((ticket, index) => (
-              <Card
-                key={index}
-                className={`relative ${
-                  ticket.popular ? 'border-primary ring-2 ring-primary/20' : ''
-                }`}
-              >
-                {ticket.popular && (
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white px-4 py-1 rounded-full text-sm font-bold">
-                    Most Popular
-                  </div>
-                )}
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-white mb-2">{ticket.name}</h3>
-                  <div className="text-4xl font-bold text-primary mb-4">{ticket.price}</div>
-                  <p className="text-text-secondary mb-6">{ticket.description}</p>
-                  <ul className="space-y-3 mb-8">
-                    {ticket.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start">
-                        <Check className="w-5 h-5 text-primary mr-3 flex-shrink-0" />
-                        <span className="text-text-secondary text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <a href="https://apoelfc.com.cy/tickets">
-                    <Button variant={ticket.popular ? 'primary' : 'outline'} className="w-full">
-                      Buy Now
-                    </Button>
-                  </a>
-                </CardContent>
-              </Card>
+              <Grid size={{ xs: 12, md: 4 }} key={index}>
+                <Card hover={ticket.popular} className="relative h-full">
+                  {ticket.popular && (
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        backgroundColor: 'primary.main',
+                        color: 'primary.contrastText',
+                        px: 2,
+                        py: 0.5,
+                        borderRadius: '50px',
+                        fontSize: '0.875rem',
+                        fontWeight: 700,
+                      }}
+                    >
+                      Most Popular
+                    </Box>
+                  )}
+                  <CardContent className="p-4">
+                    <CardTitle>{ticket.name}</CardTitle>
+                    <Typography variant="h3" sx={{ fontWeight: 700, color: 'primary.main', mb: 2 }}>
+                      {ticket.price}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
+                      {ticket.description}
+                    </Typography>
+                    <Box sx={{ mb: 3 }}>
+                      {ticket.features.map((feature, idx) => (
+                        <Box key={idx} sx={{ display: 'flex', alignItems: 'flex-start', mb: 1 }}>
+                          <Check 
+                            size={20} 
+                            style={{ 
+                              color: 'primary.main', 
+                              marginRight: '0.75rem', 
+                              flexShrink: 0 
+                            }} 
+                          />
+                          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                            {feature}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </Box>
+                    <Link href="https://apoelfc.com.cy/tickets" style={{ textDecoration: 'none' }}>
+                      <Button 
+                        variant={ticket.popular ? 'primary' : 'outline'} 
+                        sx={{ width: '100%' }}
+                      >
+                        Buy Now
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              </Grid>
             ))}
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Box>
 
       {/* Info Section */}
-      <section className="py-12 bg-surface">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8">Ticket Information</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card>
-              <CardContent className="p-8">
-                <h3 className="text-xl font-bold text-white mb-4">Match Day Rules</h3>
-                <ul className="space-y-3 text-text-secondary">
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>
-                      Gates open 90 minutes before kickoff. Arrive early to avoid queues.
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>
-                      Valid photo ID required for entry. Tickets are non-transferable.
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>
-                      Prohibited items include bottles, cans, flares, and large bags.
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>
-                      Fans are expected to behave respectfully. Disruptive behavior may
-                      result in ejection.
-                    </span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-8">
-                <h3 className="text-xl font-bold text-white mb-4">Supporter Services</h3>
-                <ul className="space-y-3 text-text-secondary">
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>
-                      Ticket office: Open Monday–Friday, 10am–6pm at GSP Stadium
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>
-                      Phone: +357 22 711 111 | Email: tickets@apoelfc.com.cy
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>
-                      Disabled access: Contact us in advance for accessible seating
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>
-                      Refunds: Available for match cancellations only
-                    </span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-    </div>
+      <Box sx={{ py: { xs: 4, md: 8 }, backgroundColor: 'background.default' }}>
+        <Container maxWidth="lg">
+          <Typography variant="h2" sx={{ fontWeight: 700, mb: 4 }}>
+            Ticket Information
+          </Typography>
+          <Grid container spacing={4}>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Card>
+                <CardHeader>
+                  <CardTitle>Match Day Rules</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                      <Typography variant="body2" sx={{ color: 'primary.main', mr: 1 }}>•</Typography>
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        Gates open 90 minutes before kickoff. Arrive early to avoid queues.
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                      <Typography variant="body2" sx={{ color: 'primary.main', mr: 1 }}>•</Typography>
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        Valid photo ID required for entry. Tickets are non-transferable.
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                      <Typography variant="body2" sx={{ color: 'primary.main', mr: 1 }}>•</Typography>
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        Prohibited items include bottles, cans, flares, and large bags.
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                      <Typography variant="body2" sx={{ color: 'primary.main', mr: 1 }}>•</Typography>
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        Fans are expected to behave respectfully. Disruptive behavior may
+                        result in ejection.
+                      </Typography>
+                    </Box>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Card>
+                <CardHeader>
+                  <CardTitle>Supporter Services</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                      <Typography variant="body2" sx={{ color: 'primary.main', mr: 1 }}>•</Typography>
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        Ticket office: Open Monday–Friday, 10am–6pm at GSP Stadium
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                      <Typography variant="body2" sx={{ color: 'primary.main', mr: 1 }}>•</Typography>
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        Phone: +357 22 711 111 | Email: tickets@apoelfc.com.cy
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                      <Typography variant="body2" sx={{ color: 'primary.main', mr: 1 }}>•</Typography>
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        Disabled access: Contact us in advance for accessible seating
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                      <Typography variant="body2" sx={{ color: 'primary.main', mr: 1 }}>•</Typography>
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        Refunds: Available for match cancellations only
+                      </Typography>
+                    </Box>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </Box>
   );
 }

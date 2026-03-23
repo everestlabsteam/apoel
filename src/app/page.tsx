@@ -1,9 +1,10 @@
 import { Hero } from '@/components/ui/hero';
 import { MatchCard } from '@/components/ui/match-card';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { nextMatch, recentMatches } from '@/data/matches';
 import Link from 'next/link';
+import { Box, Container, Typography, Grid } from '@mui/material';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="space-y-16">
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 4, md: 8 } }}>
       {/* Hero Section */}
       <Hero
         title="APOEL FC"
@@ -62,9 +63,11 @@ export default function HomePage() {
       />
 
       {/* Next Match Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8">Next Match</h2>
+      <Box sx={{ py: { xs: 4, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Typography variant="h2" sx={{ fontWeight: 700, mb: 3 }}>
+            Next Match
+          </Typography>
           <MatchCard
             date={nextMatch.date}
             homeTeam={nextMatch.homeTeam}
@@ -74,79 +77,100 @@ export default function HomePage() {
             venue={nextMatch.venue}
             status={nextMatch.status}
           />
-        </div>
-      </section>
+        </Container>
+      </Box>
 
       {/* Recent Results Section */}
-      <section className="py-12 bg-surface">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8">Recent Results</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <Box sx={{ py: { xs: 4, md: 8 }, backgroundColor: 'background.default' }}>
+        <Container maxWidth="lg">
+          <Typography variant="h2" sx={{ fontWeight: 700, mb: 3 }}>
+            Recent Results
+          </Typography>
+          <Grid container spacing={4}>
             {recentMatches.map((match, index) => (
-              <MatchCard
-                key={index}
-                date={match.date}
-                homeTeam={match.homeTeam}
-                awayTeam={match.awayTeam}
-                score={match.score}
-                competition={match.competition}
-                venue={match.venue}
-                status={match.status}
-                result={match.result}
-              />
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
+                <MatchCard
+                  date={match.date}
+                  homeTeam={match.homeTeam}
+                  awayTeam={match.awayTeam}
+                  score={match.score}
+                  competition={match.competition}
+                  venue={match.venue}
+                  status={match.status}
+                  result={match.result}
+                />
+              </Grid>
             ))}
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Box>
 
       {/* Quick Links Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8">Quick Links</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Link href="/squad">
-              <Card hover className="cursor-pointer">
-                <CardContent className="flex flex-col items-center justify-center py-8">
-                  <div className="text-4xl font-bold text-primary mb-2">25</div>
-                  <div className="text-sm text-text-secondary uppercase tracking-wider">
-                    Players
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/history">
-              <Card hover className="cursor-pointer">
-                <CardContent className="flex flex-col items-center justify-center py-8">
-                  <div className="text-4xl font-bold text-primary mb-2">29</div>
-                  <div className="text-sm text-text-secondary uppercase tracking-wider">
-                    League Titles
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/stadium">
-              <Card hover className="cursor-pointer">
-                <CardContent className="flex flex-col items-center justify-center py-8">
-                  <div className="text-4xl font-bold text-primary mb-2">22,859</div>
-                  <div className="text-sm text-text-secondary uppercase tracking-wider">
-                    Capacity
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="#">
-              <Card hover className="cursor-pointer">
-                <CardContent className="flex flex-col items-center justify-center py-8">
-                  <div className="text-4xl font-bold text-primary mb-2">Forum</div>
-                  <div className="text-sm text-text-secondary uppercase tracking-wider">
-                    Join Fan Forum
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </div>
-      </section>
-    </div>
+      <Box sx={{ py: { xs: 4, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Typography variant="h2" sx={{ fontWeight: 700, mb: 3 }}>
+            Quick Links
+          </Typography>
+          <Grid container spacing={4}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Link href="/squad" style={{ textDecoration: 'none' }}>
+                <Card hover className="cursor-pointer h-full">
+                  <CardContent className="flex flex-col items-center justify-center py-4">
+                    <Typography variant="h2" sx={{ fontWeight: 700, color: 'primary.main', mb: 1 }}>
+                      25
+                    </Typography>
+                    <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: 'text.secondary' }}>
+                      Players
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Link href="/history" style={{ textDecoration: 'none' }}>
+                <Card hover className="cursor-pointer h-full">
+                  <CardContent className="flex flex-col items-center justify-center py-4">
+                    <Typography variant="h2" sx={{ fontWeight: 700, color: 'primary.main', mb: 1 }}>
+                      29
+                    </Typography>
+                    <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: 'text.secondary' }}>
+                      League Titles
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Link href="/stadium" style={{ textDecoration: 'none' }}>
+                <Card hover className="cursor-pointer h-full">
+                  <CardContent className="flex flex-col items-center justify-center py-4">
+                    <Typography variant="h2" sx={{ fontWeight: 700, color: 'primary.main', mb: 1 }}>
+                      22,859
+                    </Typography>
+                    <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: 'text.secondary' }}>
+                      Capacity
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <Link href="#" style={{ textDecoration: 'none' }}>
+                <Card hover className="cursor-pointer h-full">
+                  <CardContent className="flex flex-col items-center justify-center py-4">
+                    <Typography variant="h2" sx={{ fontWeight: 700, color: 'primary.main', mb: 1 }}>
+                      Forum
+                    </Typography>
+                    <Typography variant="caption" sx={{ textTransform: 'uppercase', letterSpacing: '0.1em', color: 'text.secondary' }}>
+                      Join Fan Forum
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </Box>
   );
 }

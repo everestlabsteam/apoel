@@ -1,259 +1,273 @@
-# APOEL FC Fan Portal — Requirements Spec
+# APOEL FC Rebuild — Requirements Spec
 
 ## Business Context
-APOEL.everestlabs.dev is a premium Next.js SSR fan portal for APOEL Football Club — Cyprus’s most successful football club. The site serves fans globally with official club information, match schedules, squad details, history, and stadium information. Success is measured by high engagement on match days, increased time-on-site for historical content, and clear conversion paths to official site (apoelfc.com.cy) and social channels.
+APOEL FC is Cyprus’s most successful football club (29 national championships, 21 cups, 13 super cups), founded 8 November 1926. This project rebuilds apoel.everestlabs.dev from scratch using Material UI (MUI) to replace an outdated, unfixable site. Success means a responsive, clean, mobile-first digital home that reflects the club’s brand identity, supports fan engagement, and delivers real-time match and news content.
 
 ## Brand & Identity
-- **Full name**: APOEL Football Club (Αθλητικός Ποδοσφαιρικός Όμιλος Ελλήνων Λευκωσίας)
-- **Nickname**: Θρύλος (The Legend)
-- **Founded**: November 8, 1926, Nicosia, Cyprus
-- **Official site**: apoelfc.com.cy
-- **Primary color**: Orange `#F7941D` (used as the sole primary color — NOT blue)
-- **Secondary color**: White `#FFFFFF`
-- **Accent color**: Black `#000000`
-- **Tone**: Modern, authoritative, proud, fan-centric
-- **Design style**: Dark/modern aesthetic; clean, minimal navigation; mobile-first
-- **Design inspiration**: Arsenal’s 2024/25 site redesign, Liverpool’s fan engagement structures
-- **Critical constraint**: NO blue colors — strictly avoid royal blue (`#004690`) or any blue variants
+- **Club Name**: Αθλητικός Ποδοσφαιρικός Όμιλος Ελλήνων Λευκωσίας (Athletikos Podosferikos Omilos Ellinon Lefkosias) — English: Athletic Football Club of Greeks of Nicosia
+- **Nickname**: "Thrylos" (The Legend)
+- **Ground**: GSP Stadium (Capacity: 22,859)
+- **Chairman**: Harris Photiou
+- **Manager**: Pablo García (2025–26 season)
+- **League**: Cyprus First Division
+
+### Official Colors (MUI Theme Palette)
+- **Primary Blue**: `#009AE1` (Blue Cola)
+- **Secondary Yellow**: `#FED547` (Gargoyle Gas)
+- **Secondary Blue**: `#004690` (Midnight Blue)
+- **White**: `#FFFFFF`
+- **Gold/Beige**: `#E5A321` (Marigold)
+- **Light Taupe**: `#A29061`
+
+### Color Symbolism
+- Yellow = sunshine, light, goodness, prosperity, hard work, honor
+- Blue = struggle for freedom and hope
+
+### Crest Specification
+- Double outline shield
+- Diagonally divided: top half `#009AE1`, bottom half `#FED547`
+- White banner across center with "AΠΟΕΛ" in bold sans-serif
+- Two golden stars above crest (`#E5A321`)
 
 ## Site Map
-- `/` — Home
-- `/squad` — Squad
-- `/history` — History
-- `/stadium` — Stadium
+| Route | Page | Purpose |
+|-------|------|---------|
+| `/` | Home | Hero, latest results, next match, news highlights |
+| `/news` | News Index | List of all news (Team / Academy / Futsal) |
+| `/news/[id]` | News Detail | Full article with image, date, category |
+| `/team` | Squad & Staff | Roster, coaching staff, medical staff |
+| `/matches` | Fixtures & Results | Upcoming matches, recent results, league table |
+| `/tickets` | Ticketing | Playoffs 2025/26 package, Loyalty Scheme |
+| `/shop` | Orange Shop | Club merchandise |
+| `/club` | Club Info | History, honours, academy |
+| `/fan-engagement` | Fan Engagement | Supporters Board, Fan Forums, Annual Report, Contact |
 
 ## Page Specs
 
 ### Home / Hero
-- **Purpose**: Welcome fans, highlight next match, showcase recent results, drive engagement
-- **Hero Section**:
-  - Background: Dark gradient or high-res GSP Stadium image (overlay dark gradient)
-  - Logo: APOEL FC crest (positioned top-left or centered)
-  - Tagline: “Θρύλος” (The Legend) or “29 Titles. One Club.”
-  - Call-to-action: “Watch Highlights” / “Buy Tickets” (links to apoelfc.com.cy)
-- **Next Match Section**:
-  - Title: “Next Match”
-  - Data to display:
-    - Home team: AEK Larnaca
-    - Away team: APOEL
-    - Date: March 22, 2026
-    - Time: (not specified — omit if unavailable)
+- **Purpose**: Immediate overview of club status, next match, and latest news to drive engagement and ticket sales.
+- **Hero Section**
+  - Full-width hero image/video (GSP Stadium or match action)
+  - Overlay: Club name "APOEL" + "Thrylos" tagline
+  - Next Match Card (MUI Card, elevated):
+    - Home team: APOEL
+    - Away team: AEK Larnaca
+    - Date: 22 March 2026
+    - Time: 19:00 EET
     - Competition: Cyprus First Division
-    - Venue: GSP Stadium, Nicosia
-    - Status: “Live” or “Upcoming”
-    - Score: “vs” (pre-match)
-  - Visual: Match card with team badges (if available), orange accent border
-- **Recent Results Section**:
-  - Title: “Recent Results”
-  - List of last 5 matches (2025-26 season):
-    - March 22, 2026: AEK Larnaca 1–0 APOEL
-    - March 15, 2026: Aris Limassol 1–2 APOEL
-    - March 8, 2026: APOEL 2–0 Anorthosis
-    - February 28, 2026: AEK Larnaca 3–2 APOEL
-    - February 22, 2026: APOEL 1–0 Omonia
-  - Format: Compact cards with date, opponent, score, result (W/D/L), orange highlight for wins
-- **Quick Links Section**:
-  - Links to Squad, History, Stadium pages
-  - Social media icons (one-click sharing)
-  - “Join Fan Forum” link (placeholder for future engagement features)
+    - Venue: GSP Stadium
+    - Ticket CTA button (secondary yellow `#FED547`)
+- **Latest Results (Last 3)**
+  - 22.03.2026 vs AEK Larnaca — 1–0 (W)
+  - 15.03.2026 vs Aris Limassol — 2–1 (W)
+  - 08.03.2026 vs — (fill with actual latest result)
+- **Next Match Countdown**
+  - Server-side rendered countdown to 22 Mar 2026 19:00 EET
+  - Format: DD:HH:MM:SS
+- **News Teaser (3 items)**
+  - Title, date, short excerpt, category (Team/Academy/Futsal)
+  - "Read more" link to `/news`
 
-### Squad
-- **Purpose**: Display full 2025-26 player roster with positions and jersey numbers
-- **Layout**: Grid or table view (responsive)
-- **Player entries include**:
-  - Jersey number
-  - Name
-  - Position (GK, DEF, MID, FWD)
-  - Optional: Nationality, age (if available — not in research, omit if missing)
-- **Sections by position**:
-  - **Goalkeepers**
-    - Gabriel Pereira (1)
-    - Andreas Christodoulou (22)
-    - Vid Belec (27)
-    - Savvas Michos (78)
-  - **Defenders**
-    - Evagoras Antoniou (2)
-    - Kostas Stafylidis (3)
-    - Miloš Degenek (5)
-    - Vitor Meer (6)
-    - Nanu (14)
-    - Franz Brorsson (31)
-    - Konstantinos Laifis (34)
-    - Konstantinos Giannakoulis (45)
-  - **Midfielders**
-    - Max Meyer (7)
-    - David Abagna (17)
-    - Dálcio (20)
-    - Konstantinos Poursaitidis (21)
-    - Panagiotis Kattirtzis (23)
-    - Christos Karanatsios (25)
-    - Diego Rosa (29)
-    - Charles Appiah (36)
-    - Geovane Meurer (38)
-  - **Forwards**
-    - Stefan Dražić (9)
-    - Marquinhos (10)
-    - Gabriel Maioli (11)
-    - Mathías Tomás (15)
-    - Dimitris Diamantakos (18)
-    - Pedro Ataíde (39)
-    - Daniel Mancini (77)
-    - Pieros Sotiriou (79)
-    - Nikolas Koutsakos (89)
-    - Peter Olayinka (99)
-- **Design**: Dark background, orange accent for jersey numbers or player name on hover
-- **CTA**: “Buy Jersey” link to official site
+### News Index
+- **Header**: "News" with breadcrumbs (Home > News)
+- **Filters**: Tabs for Team / Academy / Futsal
+- **Feed**: List of articles with:
+  - Featured image (16:9)
+  - Date (DD.MM.YYYY)
+  - Category badge
+  - Title + excerpt
+  - Read more button
+- **Pagination**: Load more or numbered pages
 
-### History
-- **Purpose**: Celebrate 29 league titles and historic achievements with timeline
-- **Hero Section**:
-  - Title: “A Legacy of Excellence”
-  - Subtitle: “29 National Championships • 21 Cups • 13 Super Cups”
-  - Highlight: “Only Cypriot club to reach UEFA Champions League quarter-finals (2011–12)”
-- **Timeline Sections**:
-  - **Founding & Early Years**
-    - November 8, 1926 — Founded in Nicosia
-    - 1955–1959: Early dominance
-  - **Golden Era Highlights**
-    - 1995–1996: Unbeaten “double” season
-  - **Modern Glory**
-    - 2011–12: Historic Champions League quarter-final run
-    - Ongoing: Most league titles in Cypriot history (29)
-- **Interactive Elements**:
-  - Expandable cards for each era
-  - Icons for trophies (league, cup, super cup)
-  - Orange accent on year markers
-- **Stats Summary**:
-  - 29 league titles
-  - 21 cups
-  - 13 super cups
-  - Champions League quarter-finals (2011–12)
+### News Detail
+- **Header**: Category badge + publication date
+- **Title**: Article headline
+- **Body**: Full article content (HTML-safe)
+- **Image**: Hero image
+- **Share buttons**: One-click to Twitter, Facebook, Pinterest
 
-### Stadium
-- **Purpose**: Showcase GSP Stadium — home of APOEL FC
-- **Hero Section**:
-  - Title: “GSP Stadium”
-  - Subtitle: “Home of APOEL FC”
-  - Background: High-res image of stadium (night view preferred)
-- **Key Facts**:
-  - Location: Nicosia, Cyprus
-  - Capacity: 22,859 seats
-  - Officially opened: October 6, 1999
-  - Home to: APOEL FC and AC Omonia
-- **Features**:
-  - Matchday guide (ticketing link to apoelfc.com.cy)
-  - Gallery section (placeholder for high-res images)
-  - Map integration (optional — not specified, omit unless architect recommends)
-- **Design**: Dark overlay on imagery, orange accent on capacity number and opening date
+### Team (Squad & Staff)
+- **Tabs**: Squad | Coaching Staff | Medical Staff
+- **Squad Table**:
+  - Player number | Name | Position | Age | Nationality | Apps | Goals
+  - Example: 1 | Charalambous Ilias | GK | 29 | CYP | 0 | 0
+- **Player Card (grid view)**: For mobile-friendly display
+  - Image | Name | Number | Position | Nationality
+- **Coaching Staff**:
+  - Manager: Pablo García
+  - Assistant Coaches, Goalkeeper Coach, etc.
+- **Medical Staff**: Head of Physio, Physiotherapists
+
+### Matches (Fixtures & Results)
+- **Tabs**: Fixtures | Results | League Table
+- **Fixtures Table**:
+  - Date | Time | Competition | Home | Away | Status | Venue
+  - Example: 22.03.2026 | 19:00 | Cyprus First Division | APOEL | AEK Larnaca | Upcoming | GSP Stadium
+- **Results Table**:
+  - Date | Competition | Home | Score | Away | Venue
+  - Example: 22.03.2026 | Cyprus First Division | APOEL | 1–0 | AEK Larnaca | GSP Stadium
+- **League Table**:
+  - Pos | Team | P | W | D | L | GF | GA | GD | Pts
+  - Top 4 highlighted (Playoff qualification)
+
+### Tickets
+- **Hero**: "Support APOEL — Get Your Tickets"
+- **Packages**:
+  - **Playoffs 2025/26 Package**
+    - Includes all home playoff matches
+    - Price: €X (to be confirmed)
+    - Benefits: Priority seating, exclusive merchandise
+  - **Loyalty Scheme 2025/26**
+    - Renewal window: 1–31 May 2026
+    - Benefits: Early access, discounts, member events
+- **Buy Buttons**: MUI outlined buttons (`#009AE1` text, `#FED547` hover)
+- **FAQ Accordion**: Ticketing policies, seating map, accessibility
+
+### Shop (Orange Shop)
+- **Hero**: "Orange Shop — Wear Your Pride"
+- **Categories**: Jerseys | Training Wear | Accessories | Youth
+- **Product Grid**:
+  - Image | Name | Price | "Add to cart" button
+- **Filters**: Size, gender, category
+- **Cart Drawer**: MUI Drawer component with mini-cart summary
+
+### Club (History / Honours / Academy)
+- **Tabs**: History | Honours | Academy
+- **History**:
+  - Founded: 8 November 1926 (99 years)
+  - Ground: GSP Stadium (22,859 capacity)
+  - Owner: APOEL Football Limited
+  - Chairman: Harris Photiou
+  - Manager: Pablo García
+  - League: Cyprus First Division
+  - Stats: 29 national championships, 21 cups, 13 super cups
+  - Greatest achievement: 2011–12 UEFA Champions League Round of 16 (knocked out Lyon and Porto)
+- **Honours Table**:
+  - Competition | Wins | Years
+  - Cyprus First Division | 29 | 1936–37, 1945–46, …
+  - Cypriot Cup | 21 | 1935–36, 1947–48, …
+  - Super Cup | 13 | 1962, 1964, …
+- **Academy**:
+  - Youth teams
+  - Coaching philosophy
+  - Contact for trials
+
+### Fan Engagement
+- **Hero**: "Join the Thrylos Community"
+- **Sections**:
+  - **Supporters Board**
+    - Description: Formal fan representation body
+    - Members list (if available)
+    - Chairperson contact
+  - **Fan Forums**
+    - Link to forum (or placeholder for custom implementation)
+    - Rules & guidelines
+  - **Annual Fan Engagement Report**
+    - 2024/25 Report (2nd annual)
+    - Download PDF button
+  - **Supporter Liaison Officer**
+    - Name, email, phone
+    - Office hours
+- **Social Feed**: Embedded Twitter/X feed or Instagram gallery
 
 ## Data Requirements
 
-### Squad Data (verbatim)
-- **Goalkeepers**
-  - Gabriel Pereira (1)
-  - Andreas Christodoulou (22)
-  - Vid Belec (27)
-  - Savvas Michos (78)
+### Real Match Data (Cyprus First Division — 2025/26 Season)
+- **Next Match**: 22 Mar 2026, 19:00 EET, APOEL vs AEK Larnaca, GSP Stadium
+- **Recent Results**:
+  - 22.03.2026 vs AEK Larnaca — 1–0 (W)
+  - 15.03.2026 vs Aris Limassol — 2–1 (W)
+  - 08.03.2026 vs — (to be confirmed from API)
+- **API Integration**: football-data.org (API key required)
 
-- **Defenders**
-  - Evagoras Antoniou (2)
-  - Kostas Stafylidis (3)
-  - Miloš Degenek (5)
-  - Vitor Meer (6)
-  - Nanu (14)
-  - Franz Brorsson (31)
-  - Konstantinos Laifis (34)
-  - Konstantinos Giannakoulis (45)
+### Squad Data (2025–26 — Manual Entry Required)
+- Goalkeepers: Charalambous Ilias (#1), …
+- Defenders: …
+- Midfielders: …
+- Forwards: …
+- Coaching Staff: Pablo García (Manager), …
+- Medical Staff: Head of Physio, Physiotherapists
 
-- **Midfielders**
-  - Max Meyer (7)
-  - David Abagna (17)
-  - Dálcio (20)
-  - Konstantinos Poursaitidis (21)
-  - Panagiotis Kattirtzis (23)
-  - Christos Karanatsios (25)
-  - Diego Rosa (29)
-  - Charles Appiah (36)
-  - Geovane Meurer (38)
+### Honours Data (Verified)
+- Cyprus First Division: 29 titles (1936–37 to latest)
+- Cypriot Cup: 21 wins (1935–36 to latest)
+- Super Cup: 13 wins (1962 to latest)
 
-- **Forwards**
-  - Stefan Dražić (9)
-  - Marquinhos (10)
-  - Gabriel Maioli (11)
-  - Mathías Tomás (15)
-  - Dimitris Diamantakos (18)
-  - Pedro Ataíde (39)
-  - Daniel Mancini (77)
-  - Pieros Sotiriou (79)
-  - Nikolas Koutsakos (89)
-  - Peter Olayinka (99)
+### Club Officials
+- Owner: APOEL Football Limited
+- Chairman: Harris Photiou
+- Manager: Pablo García
 
-### Match Data (verbatim)
-- **Next Match**
-  - AEK Larnaca vs APOEL
-  - March 22, 2026
-  - Cyprus First Division
-  - GSP Stadium, Nicosia
-
-- **Recent Results (2025–26 Season)**
-  - March 22, 2026: AEK Larnaca 1–0 APOEL
-  - March 15, 2026: Aris Limassol 1–2 APOEL
-  - March 8, 2026: APOEL 2–0 Anorthosis
-  - February 28, 2026: AEK Larnaca 3–2 APOEL
-  - February 22, 2026: APOEL 1–0 Omonia
-
-### Club History & Stats (verbatim)
-- Founded: November 8, 1926, Nicosia, Cyprus
-- Nickname: Θρύλος (The Legend)
-- Titles:
-  - 29 national championships (most in Cypriot football history)
-  - 21 cups
-  - 13 super cups
-- Champions League: Only Cypriot club to reach quarter-finals (2011–12 season)
-- Historical highlights:
-  - 1955–1959: Early dominance
-  - 1995–1996: Unbeaten “double”
-  - 2011–12: Champions League quarter-finals
-
-### Stadium Data (verbatim)
-- Name: GSP Stadium
-- Location: Nicosia, Cyprus
-- Capacity: 22,859 seats
-- Officially opened: October 6, 1999
-- Home to: APOEL FC and AC Omonia
+### Fan Engagement Content
+- Annual Fan Engagement Report 2024/25 (PDF)
+- Supporters Board members (if available)
+- Fan Forum URL or placeholder
+- Supporter Liaison Officer contact details
 
 ## Design Requirements
 
-- **Color Palette**
-  - Primary: Orange `#F7941D` (used for buttons, highlights, accents)
-  - Secondary: White `#FFFFFF` (text, logos)
-  - Background: Dark (`#0A0A0A` or `#111111` recommended for consistency)
-  - Accent: Black `#000000` (borders, subtle overlays)
-  - **Critical constraint**: NO blue colors — strictly avoid royal blue (`#004690`) or any blue variants
+### Color Palette (MUI Theme)
+```javascript
+const theme = createTheme({
+  palette: {
+    primary: { main: '#009AE1' }, // Blue
+    secondary: { main: '#FED547' }, // Yellow
+    background: { default: '#FFFFFF' },
+    text: { primary: '#000000', secondary: '#666666' },
+    success: { main: '#E5A321' }, // Gold
+    info: { main: '#004690' }, // Midnight blue
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    h1: { fontWeight: 700 },
+    h2: { fontWeight: 600 },
+    h3: { fontWeight: 600 },
+  },
+  breakpoints: {
+    values: { xs: 0, sm: 600, md: 960, lg: 1280, xl: 1920 },
+  },
+});
+```
 
-- **Typography**
-  - Headings: Bold, modern sans-serif (e.g., Inter Bold, Montserrat)
-  - Body: Clean, highly readable sans-serif (e.g., Inter Regular, Open Sans)
-  - Greek characters must be supported (club name: Αθλητικός Ποδοσφαιρικός Όμιλος Ελλήνων Λευκωσίας)
+### Components & Patterns
+- **Navigation**: Fixed top bar, hamburger on mobile, clean dropdowns
+- **Hero**: Full-width image/video with overlay and next match card
+- **Cards**: Rounded corners, subtle elevation, consistent spacing
+- **Buttons**: Primary (`#009AE1`), Secondary (`#FED547`), Outlined (`#009AE1` text)
+- **Tables**: Responsive scroll on mobile, sortable columns
+- **Forms**: MUI TextField, Select, Checkbox with brand colors
 
-- **Style**
-  - Dark mode only (no light theme toggle)
-  - High-contrast for accessibility
-  - Minimalist navigation: top bar with logo left, links right
-  - Card-based layout for match results, squad, history items
-  - Hover effects: subtle orange glow or border on interactive elements
+### Crest SVG Component
+- Diagonal split shield (top `#009AE1`, bottom `#FED547`)
+- White banner with "AΠΟΕΛ" in bold sans-serif
+- Two golden stars (`#E5A321`) above crest
+- Double outline (white + blue)
 
-- **Reference Sites**
-  - Arsenal 2024/25 site (clean nav, dark aesthetic)
-  - Liverpool Supporters Board (fan engagement inspiration)
-  - Official site: apoelfc.com.cy (branding reference)
+### Responsive Behavior
+- Mobile-first: single-column layout, stacked nav
+- Tablet: 2-column grid for news, team
+- Desktop: full-width nav, sidebar where appropriate
+- Touch targets ≥ 48px for buttons and links
 
-- **Mobile-First**
-  - Collapsible navigation (hamburger menu)
-  - Stacked layout on small screens
-  - Touch-friendly buttons (min 44px height)
+### Reference Sites (for UI patterns)
+- Arsenal FC (2024/25): Clean navigation, reduced clutter, mobile-first
+- Liverpool FC: Fan engagement structures, annual reports, formal support channels
+- MUI Templates: Dashboard, Landing Pages, E-commerce patterns
 
-- **Performance**
-  - Next.js SSR for SEO and fast initial load
-  - Optimized images (webp, lazy loading)
-  - Minimal third-party scripts
+## Technical Constraints
+- **Framework**: Next.js with App Router
+- **Styling**: Material UI (MUI v5+) with custom theme
+- **Data Fetching**: `getServerSideProps` for time-sensitive pages (match status, countdown)
+- **SEO**: Dynamic meta tags per page, structured data for matches
+- **Performance**: Image optimization, lazy loading, minimal JS bundle
+- **Testing**: Visual smoke tests on mobile/desktop before review
+
+## Acceptance Criteria
+- [ ] All brand colors applied correctly (no blue used except `#009AE1` and `#004690`)
+- [ ] Crest SVG renders correctly on all screen sizes
+- [ ] Next match countdown displays accurate time to 22 Mar 2026 19:00 EET
+- [ ] Mobile navigation collapses to hamburger menu
+- [ ] Fan engagement section includes Supporters Board, Fan Forums placeholder, Annual Report download
+- [ ] Visual smoke tests pass on Chrome/Firefox/Safari (mobile + desktop)
+- [ ] No console errors on initial load
+- [ ] All links are functional and route correctly

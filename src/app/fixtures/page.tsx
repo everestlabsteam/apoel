@@ -1,7 +1,7 @@
-import { Hero } from '@/components/ui/hero';
-import { MatchCard } from '@/components/ui/match-card';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Hero } from '@/components/ui/hero-mui';
+import { MatchCard } from '@/components/ui/match-card-mui';
+import { Box, Typography, Container, Card, CardContent, Button as MuiButton } from '@mui/material';
+import { theme } from '@/lib/theme';
 import { nextMatch, recentMatches } from '@/data/matches';
 import type { Metadata } from 'next';
 
@@ -15,7 +15,7 @@ export default function FixturesPage() {
   const allMatches = [...recentMatches];
 
   return (
-    <div className="space-y-16">
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Hero Section */}
       <Hero
         title="Fixtures & Results"
@@ -24,10 +24,12 @@ export default function FixturesPage() {
       />
 
       {/* Next Match */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8">Next Match</h2>
-          <div className="max-w-2xl mx-auto">
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.default }}>
+        <Container>
+          <Typography variant="h2" sx={{ fontSize: '2rem', fontWeight: 700, color: theme.palette.text.primary, mb: 8 }}>
+            Next Match
+          </Typography>
+          <Box sx={{ maxWidth: '48rem', mx: 'auto' }}>
             {upcomingMatches.map((match, index) => (
               <MatchCard
                 key={index}
@@ -40,15 +42,17 @@ export default function FixturesPage() {
                 status={match.status}
               />
             ))}
-          </div>
-        </div>
-      </section>
+          </Box>
+        </Container>
+      </Box>
 
       {/* Recent Results */}
-      <section className="py-12 bg-surface">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8">Recent Results</h2>
-          <div className="space-y-4">
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.paper }}>
+        <Container>
+          <Typography variant="h2" sx={{ fontSize: '2rem', fontWeight: 700, color: theme.palette.text.primary, mb: 8 }}>
+            Recent Results
+          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {allMatches.map((match, index) => (
               <MatchCard
                 key={index}
@@ -62,28 +66,43 @@ export default function FixturesPage() {
                 result={match.result}
               />
             ))}
-          </div>
-        </div>
-      </section>
+          </Box>
+        </Container>
+      </Box>
 
       {/* Season Calendar */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8">Season Calendar</h2>
-          <Card>
-            <CardContent className="p-8">
-              <div className="text-center">
-                <p className="text-text-secondary mb-6">
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.default }}>
+        <Container>
+          <Typography variant="h2" sx={{ fontSize: '2rem', fontWeight: 700, color: theme.palette.text.primary, mb: 8 }}>
+            Season Calendar
+          </Typography>
+          <Card sx={{ backgroundColor: theme.palette.background.paper }}>
+            <CardContent sx={{ p: 8 }}>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="body1" sx={{ color: theme.palette.text.secondary, mb: 6 }}>
                   Download the full 2025–26 season calendar and never miss a match.
-                </p>
-                <Button variant="primary" size="lg">
+                </Typography>
+                <MuiButton
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    backgroundColor: theme.palette.primary.main,
+                    color: '#FFFFFF',
+                    px: 6,
+                    py: 1.5,
+                    fontWeight: 600,
+                    '&:hover': {
+                      backgroundColor: '#d67c0d',
+                    },
+                  }}
+                >
                   Download Calendar
-                </Button>
-              </div>
+                </MuiButton>
+              </Box>
             </CardContent>
           </Card>
-        </div>
-      </section>
-    </div>
+        </Container>
+      </Box>
+    </Box>
   );
 }

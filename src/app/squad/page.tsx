@@ -1,8 +1,8 @@
-import { Hero } from '@/components/ui/hero';
-import { PlayerCard } from '@/components/ui/player-card';
+import { Hero } from '@/components/ui/hero-mui';
+import { PlayerCard } from '@/components/ui/player-card-mui';
 import { squad } from '@/data/squad';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Box, Typography, Container, Grid, Button as MuiButton } from '@mui/material';
+import { theme } from '@/lib/theme';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function SquadPage() {
   };
 
   return (
-    <div className="space-y-16">
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Hero Section */}
       <Hero
         title="2025–26 Squad"
@@ -29,43 +29,67 @@ export default function SquadPage() {
       />
 
       {/* Squad Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.default }}>
+        <Container>
           {positions.map((position) => (
-            <div key={position} className="mb-12">
-              <h2 className="text-2xl font-bold text-primary mb-6">
+            <Box key={position} sx={{ mb: 12 }}>
+              <Typography 
+                variant="h2" 
+                sx={{ 
+                  fontSize: '1.5rem', 
+                  fontWeight: 700, 
+                  color: theme.palette.primary.main,
+                  mb: 4,
+                }}
+              >
                 {positionLabels[position as keyof typeof positionLabels]}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              </Typography>
+              <Grid container spacing={4}>
                 {squad[position as keyof typeof squad].map((player) => (
-                  <PlayerCard
-                    key={player.number}
-                    number={player.number}
-                    name={player.name}
-                    position={player.position}
-                  />
+                  <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={player.number}>
+                    <PlayerCard
+                      number={player.number}
+                      name={player.name}
+                      position={player.position}
+                    />
+                  </Grid>
                 ))}
-              </div>
-            </div>
+              </Grid>
+            </Box>
           ))}
-        </div>
-      </section>
+        </Container>
+      </Box>
 
       {/* Fan Shop Section */}
-      <section className="py-12 bg-surface">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Buy Your Jersey</h2>
-          <p className="text-text-secondary mb-8 max-w-2xl mx-auto">
+      <Box component="section" sx={{ py: 12, backgroundColor: theme.palette.background.paper }}>
+        <Container sx={{ textAlign: 'center' }}>
+          <Typography variant="h2" sx={{ fontSize: '2rem', fontWeight: 700, color: theme.palette.text.primary, mb: 4 }}>
+            Buy Your Jersey
+          </Typography>
+          <Typography variant="body1" sx={{ color: theme.palette.text.secondary, maxWidth: '48rem', mx: 'auto', mb: 8 }}>
             Show your support for the club with our official 2025–26 replica jerseys.
             Available for all squad members.
-          </p>
-          <a href="https://orangeshop.com.cy">
-            <Button variant="primary" size="lg">
+          </Typography>
+          <a href="https://orangeshop.com.cy" style={{ textDecoration: 'none' }}>
+            <MuiButton
+              variant="contained"
+              size="large"
+              sx={{
+                backgroundColor: theme.palette.primary.main,
+                color: '#FFFFFF',
+                px: 6,
+                py: 1.5,
+                fontWeight: 600,
+                '&:hover': {
+                  backgroundColor: '#d67c0d',
+                },
+              }}
+            >
               Buy Jersey
-            </Button>
+            </MuiButton>
           </a>
-        </div>
-      </section>
-    </div>
+        </Container>
+      </Box>
+    </Box>
   );
 }
