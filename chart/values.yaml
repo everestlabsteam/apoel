@@ -1,0 +1,19 @@
+image:
+  repository: 100.113.62.14:32000/apoel
+  tag: latest
+  pullPolicy: Always
+
+replicaCount: 1
+
+resources:
+  requests:
+    memory: 128Mi
+    cpu: 50m
+  limits:
+    memory: 256Mi
+    cpu: 300m
+
+ingress:
+  host: apoel.everestlabs.dev
+  clusterIssuer: letsencrypt-prod
+  tlsSecret: apoel-tls
