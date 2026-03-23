@@ -1,0 +1,11 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/fixtures/page": "/fixtures",
+  "/history/page": "/history",
+  "/news/page": "/news",
+  "/page": "/",
+  "/squad/page": "/squad",
+  "/stadium/page": "/stadium",
+  "/tickets/page": "/tickets"
+}

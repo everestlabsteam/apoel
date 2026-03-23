@@ -1,0 +1,11 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/fixtures/page": "app/fixtures/page.js",
+  "/history/page": "app/history/page.js",
+  "/news/page": "app/news/page.js",
+  "/page": "app/page.js",
+  "/squad/page": "app/squad/page.js",
+  "/stadium/page": "app/stadium/page.js",
+  "/tickets/page": "app/tickets/page.js"
+}
