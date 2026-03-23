@@ -13,6 +13,10 @@
   "author": "",
   "license": "ISC",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/everestlabsteam/apoel.git"
+  },
   "dependencies": {
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
