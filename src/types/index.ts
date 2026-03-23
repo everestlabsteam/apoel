@@ -4,6 +4,7 @@ export interface Player {
   position: 'GK' | 'DEF' | 'MID' | 'FWD';
   nationality?: string;
   age?: number;
+  image?: string;
 }
 
 export interface Match {

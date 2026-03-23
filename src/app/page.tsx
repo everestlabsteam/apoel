@@ -10,13 +10,15 @@ export default function HomePage() {
     <div className="space-y-16">
       {/* Hero Section */}
       <Hero
-        title="29 Titles. One Club."
-        subtitle="Welcome to the official APOEL FC fan portal. Join us in celebrating our legacy and supporting our team."
+        title="APOEL FC"
+        subtitle="Αθλητικός Ποδοσφαιρικός Όμιλος Ελλήνων Λευκωσίας"
         cta={[
           { label: 'Watch Highlights', href: '#' },
           { label: 'Buy Tickets', href: 'https://apoelfc.com.cy' },
         ]}
         className="py-12 md:py-20"
+        showCrest={true}
+        tagline="Θρύλος"
       />
 
       {/* Next Match Section */}

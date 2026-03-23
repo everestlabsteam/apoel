@@ -2,14 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Facebook, Twitter, Instagram, Globe } from 'lucide-react';
 
 interface FooterProps {
   className?: string;
 }
 
 export function Footer({ className }: FooterProps) {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className={cn('border-t border-border bg-background py-12', className)}>
       <div className="container mx-auto px-4">
@@ -23,6 +22,12 @@ export function Footer({ className }: FooterProps) {
               APOEL Football Club — Cyprus's most successful football club.
               Join us in celebrating our legacy and supporting our team.
             </p>
+            <div className="mt-4 flex items-center gap-2 text-sm text-text-secondary">
+              <Globe className="w-4 h-4" />
+              <a href="https://apoelfc.com.cy" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                apoelfc.com.cy
+              </a>
+            </div>
           </div>
           
           <div>
@@ -80,17 +85,20 @@ export function Footer({ className }: FooterProps) {
         
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-text-secondary">
-            © {currentYear} APOEL Football Club. All rights reserved.
+            © APOEL FC 1926–2026. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <a href="#" className="text-text-secondary hover:text-primary transition-colors">
-              Facebook
+            <a href="https://facebook.com/APOEL" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-primary transition-colors">
+              <Facebook className="w-5 h-5" />
+              <span className="sr-only">Facebook</span>
             </a>
-            <a href="#" className="text-text-secondary hover:text-primary transition-colors">
-              Twitter
+            <a href="https://twitter.com/APOEL_FC" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-primary transition-colors">
+              <Twitter className="w-5 h-5" />
+              <span className="sr-only">Twitter</span>
             </a>
-            <a href="#" className="text-text-secondary hover:text-primary transition-colors">
-              Instagram
+            <a href="https://instagram.com/APOEL_FC" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-primary transition-colors">
+              <Instagram className="w-5 h-5" />
+              <span className="sr-only">Instagram</span>
             </a>
           </div>
         </div>
