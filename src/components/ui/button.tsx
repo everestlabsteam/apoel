@@ -18,13 +18,13 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:pointer-events-none';
+  const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0A0A0A] disabled:opacity-50 disabled:pointer-events-none';
   
   const variants = {
-    primary: 'bg-primary text-white hover:bg-primary-hover active:bg-primary-active focus:ring-primary shadow-sm',
-    secondary: 'bg-surface text-primary hover:bg-surface-hover active:bg-surface-active focus:ring-secondary border border-border',
-    outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary',
-    ghost: 'hover:bg-surface text-text-primary hover:text-primary focus:ring-primary',
+    primary: 'bg-[#F7941D] text-white hover:bg-[#FFA53A] active:bg-[#D67D15] focus:ring-[#F7941D] shadow-sm',
+    secondary: 'bg-[#111111] text-[#F7941D] hover:bg-[#1A1A1A] active:bg-[#222222] focus:ring-[#111111] border border-[#2A2A2A]',
+    outline: 'border-2 border-[#F7941D] text-[#F7941D] hover:bg-[#F7941D] hover:text-white focus:ring-[#F7941D]',
+    ghost: 'hover:bg-[#111111] text-[#FFFFFF] hover:text-[#F7941D] focus:ring-[#F7941D]',
   };
   
   const sizes = {

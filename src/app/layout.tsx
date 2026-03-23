@@ -55,8 +55,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} font-sans`}>
-      <body className="min-h-screen bg-background text-text-primary">
+    <html lang="en" className={`dark ${inter.variable} font-sans`}>
+      <body className="min-h-screen bg-[#0A0A0A] text-[#FFFFFF]">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

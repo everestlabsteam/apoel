@@ -20,11 +20,11 @@ export function Header({ className }: HeaderProps) {
   ];
 
   return (
-    <header className={cn('sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60', className)}>
+    <header className={cn('sticky top-0 z-50 w-full border-b border-[#2A2A2A] bg-[#0A0A0A]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0A0A0A]/60', className)}>
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary rounded-md" />
-          <span className="font-bold text-xl text-white">APOEL</span>
+          <div className="w-8 h-8 bg-[#F7941D] rounded-md" />
+          <span className="font-bold text-xl text-[#FFFFFF]">APOEL</span>
         </Link>
         
         <nav className="hidden md:flex items-center gap-6">
@@ -32,7 +32,7 @@ export function Header({ className }: HeaderProps) {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-text-secondary hover:text-primary transition-colors"
+              className="text-sm font-medium text-[#E0E0E0] hover:text-[#F7941D] transition-colors"
             >
               {item.label}
             </Link>

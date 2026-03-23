@@ -28,27 +28,27 @@ export function MatchCard({
   const getResultColor = (res?: string) => {
     switch (res) {
       case 'W':
-        return 'text-win';
+        return 'text-[#F7941D]';
       case 'D':
-        return 'text-draw';
+        return 'text-[#A0A0A0]';
       case 'L':
-        return 'text-loss';
+        return 'text-[#707070]';
       default:
-        return 'text-text-secondary';
+        return 'text-[#E0E0E0]';
     }
   };
 
   return (
-    <Card className={cn('hover:border-primary transition-all duration-200', className)}>
+    <Card className={cn('hover:border-[#F7941D] transition-all duration-200', className)}>
       <div className="flex flex-col gap-3">
         <div className="flex justify-between items-start">
-          <span className="text-sm text-text-secondary font-medium">{date}</span>
-          <span className="text-xs font-medium px-2 py-1 rounded-full bg-surface border border-border">
+          <span className="text-sm text-[#E0E0E0] font-medium">{date}</span>
+          <span className="text-xs font-medium px-2 py-1 rounded-full bg-[#111111] border border-[#2A2A2A]">
             {competition}
           </span>
         </div>
         
-        <div className="flex justify-between items-center py-3 border-y border-border">
+        <div className="flex justify-between items-center py-3 border-y border-[#2A2A2A]">
           <div className="flex-1 text-center">
             <span className="font-bold text-lg">{homeTeam}</span>
           </div>
@@ -62,7 +62,7 @@ export function MatchCard({
           </div>
         </div>
         
-        <div className="flex justify-between items-center text-sm text-text-secondary">
+        <div className="flex justify-between items-center text-sm text-[#E0E0E0]">
           <span>{venue}</span>
           <span className="font-medium">{status}</span>
         </div>

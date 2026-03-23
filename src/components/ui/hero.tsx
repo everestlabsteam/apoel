@@ -26,7 +26,7 @@ export function Hero({
   tagline = 'Θρύλος'
 }: HeroProps) {
   return (
-    <div className={`relative overflow-hidden bg-background ${className}`}>
+    <div className={`relative overflow-hidden bg-[#0A0A0A] ${className}`}>
       {image && (
         <div className="absolute inset-0 z-0">
           <img
@@ -34,16 +34,16 @@ export function Hero({
             alt="Hero background"
             className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/50 to-[#0A0A0A]" />
         </div>
       )}
       <div className="relative z-10 container mx-auto px-4 py-16 md:py-24">
         <div className="max-w-4xl mx-auto text-center">
           {showCrest && (
             <div className="mb-6">
-              <div className="inline-block p-4 bg-surface rounded-full">
+              <div className="inline-block p-4 bg-[#111111] rounded-full">
                 <svg 
-                  className="w-16 h-16 md:w-24 md:h-24 text-primary" 
+                  className="w-16 h-16 md:w-24 md:h-24 text-[#F7941D]" 
                   viewBox="0 0 100 100" 
                   fill="none"
                 >
@@ -56,17 +56,17 @@ export function Hero({
             </div>
           )}
           {tagline && (
-            <p className="text-lg md:text-xl font-bold text-primary mb-4 tracking-widest uppercase">
+            <p className="text-lg md:text-xl font-bold text-[#F7941D] mb-4 tracking-widest uppercase">
               {tagline}
             </p>
           )}
           {title && (
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-[#FFFFFF] tracking-tight">
               {title}
             </h1>
           )}
           {subtitle && (
-            <p className="text-xl md:text-2xl text-text-secondary mb-8">
+            <p className="text-xl md:text-2xl text-[#E0E0E0] mb-8">
               {subtitle}
             </p>
           )}

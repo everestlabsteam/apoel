@@ -28,14 +28,14 @@ export function MobileMenu() {
       </Button>
       
       {isOpen && (
-        <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm md:hidden">
+        <div className="fixed inset-0 z-50 bg-[#0A0A0A]/95 backdrop-blur-sm md:hidden">
           <div className="container mx-auto px-4 py-8">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-xl font-medium text-text-primary hover:text-primary transition-colors"
+                  className="text-xl font-medium text-[#E0E0E0] hover:text-[#F7941D] transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
